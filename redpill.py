@@ -533,7 +533,7 @@ def start(stdscr):
                 nextRoom = (nextRoom + 1) % len(rooms)
                 the_room_to_post_to = None
             elif c == 10: # enter
-                with open('sends.log', 'a') as the_file:
+                with open('redpill-sends.log', 'a') as the_file:
                     the_file.write("the_room_to_post_to:" + str(the_room_to_post_to) + "\n")
                     the_file.write("lastEventRoom: " + str(lastEventRoom) + "\n")
                     the_file.write("room: " + str(room) + "\n")
