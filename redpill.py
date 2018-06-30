@@ -115,36 +115,39 @@ def start(stdscr):
 
         stdscr.clear()
 
+        line = "redpill v0.7"
+        line += " · screen size: " + str(size)
+        if isinstance(rooms[room], Room):
+            line += " · chat size: " + str(len(rooms[room].events))
+        line += " · room: "
+
         # we want NAME aka ALIAS[0] (ROOM_ID)
         # or 2nd choice: ALIAS[0] (ROOM_ID)
         # or fallback: ROOM_ID
-        line = str(room)
 
-        if line == all_rooms:
-            pass
-        elif rooms[room].name is None:
+        if room == all_rooms:
+            line += str(room)
+        elif rooms[room].name:
             if len(rooms[room].aliases) > 0 and rooms[room].aliases[0] != room:
-                line = rooms[room].aliases[0] + " (" + line + ")"
-        else:
-            if len(rooms[room].aliases) > 0 and rooms[room].aliases[0] != room:
-                line = rooms[room].name + " aka " + getFirstRoomAlias(rooms[room]) + " (" + line + ")"
+                line += rooms[room].name + " aka " + getFirstRoomAlias(rooms[room]) + " (" + str(room) + ")"
+            elif rooms[room].name != room:
+                line += rooms[room].name + " (" + str(room) + ")"
             else:
-                if rooms[room].name != room:
-                    line = rooms[room].name + " (" + line + ")"
+                line += str(room)
+        elif len(rooms[room].aliases) > 0 and rooms[room].aliases[0] != room:
+            line += rooms[room].aliases[0] + " (" + str(line) + ")"
+        else:
+            line += str(room)
 
         #line.encode("utf-8")
-        if rooms[room].topic is not None:
+        if isinstance(rooms[room], Room) and rooms[room].topic is not None:
             line += " · topic: " + rooms[room].topic
 
-        stdscr.addstr(
-            0, 0, (
-                "redpill v0.7 · screen size: " + str(size) + " · chat size: "
-                + str(len(rooms[room].events)) + " · room: " + str(line) + " the variables: room: " + room + " last: "
-                + lastEventRoom
-            ), curses.A_UNDERLINE
-        )
+        line += " · variables: room: " + room + ", last: " + lastEventRoom + ", nextRoom: " + str(nextRoom)
 
-        current = len(rooms[room].events) - 1
+        stdscr.addstr(0, 0, line, curses.A_UNDERLINE)
+
+        current = len(rooms[room].events) - 1 if isinstance(rooms[room], Room) else -1
 
         if True:
             y = 1
