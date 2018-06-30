@@ -198,7 +198,7 @@ def start(stdscr):
 
                     else:
                         #currentLine = size[0] - y
-                        currentLine -= 1
+                        #currentLine -= 1
 
                         if currentLine < 3:  # how many lines we want to reserve
                             break
@@ -295,7 +295,6 @@ def start(stdscr):
                             linesNeeded += (displayNamestartingPos + maxDisplayName + 3 + len(buf)) / size[1]
                             buf = ""
 
-                            currentLine -= linesNeeded
                             if currentLine - linesNeeded < 2:  # how many lines we want to reserve
                                 break
 
@@ -313,6 +312,7 @@ def start(stdscr):
 
                                 #if linesNeeded == 0:
                                 linesNeeded += 1
+                                currentLine -= linesNeeded
 
                                 for i in range(linesNeeded):
                                     buf = rawText[:size[1] - pad]
@@ -341,6 +341,8 @@ def start(stdscr):
 
                             else:
                                 # TODO: need to split this out to get proper underline
+
+                                currentLine -= linesNeeded
                                 if currentLine == size[0] - 2:
                                     stdscr.addstr(
                                         currentLine, displayNamestartingPos +
@@ -418,6 +420,7 @@ def start(stdscr):
                             elif event["content"]["membership"] == "leave":
                                 buf = " has left"
 
+                            currentLine -= 1
                             if length > maxDisplayName:
                                 if currentLine == size[0] - 2:
                                     stdscr.addstr(
