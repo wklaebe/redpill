@@ -68,7 +68,7 @@ def getFirstRoomAlias(r):
 
 def start(stdscr):
     global server, base_url, username, access_token, password
-    global size, room, data, rooms, endTime, rooms, all_rooms, lastEventRoom, room_keys
+    global size, room, rooms, all_rooms, lastEventRoom, room_keys
 
     curses.curs_set(0)
     curses.use_default_colors()
@@ -94,7 +94,6 @@ def start(stdscr):
     room_keys = list(rooms.keys())
     room = all_rooms  #room_keys[1] # "all_rooms"
     nextRoom = 1
-    endTime = client.end
 
     curses.halfdelay(10)
     maxDisplayName = 24
