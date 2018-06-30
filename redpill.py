@@ -215,7 +215,7 @@ def start(stdscr):
                         length = len(event["sender"]) if "sender" in event else 0
                         if "body" in event["content"]:
 
-                            rawText = event["content"]["body"].encode('utf-8')
+                            rawText = event["content"]["body"]  # .encode('utf-8')
 
                             if event["content"]["msgtype"] == "m.emote":
                                 if len(rawText) > 0 and rawText[0] == " ":
