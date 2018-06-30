@@ -212,11 +212,7 @@ def start(stdscr):
                                 ).strftime('%Y-%m-%d %H:%M:%S')
 
                         # assumption: body == normal message
-                        length = 0
-                        if "user_id" in event:
-                            length = len(
-                                event["user_id"]
-                            )
+                        length = len(event["sender"]) if "sender" in event else 0
                         if "body" in event["content"]:
 
                             rawText = event["content"]["body"].encode('utf-8')
@@ -358,7 +354,7 @@ def start(stdscr):
                                         curses.A_BOLD
                                     )
 
-                            usern = event["user_id"]
+                            usern = event["sender"]
 
                             if length > maxDisplayName:
                                 usern = usern[:maxDisplayName - 3] + "..."
@@ -427,7 +423,7 @@ def start(stdscr):
                                     stdscr.addstr(
                                         currentLine,
                                         displayNamestartingPos + 1,
-                                        str(event["user_id"]),
+                                        str(event["sender"]),
                                         curses.A_DIM + curses.A_UNDERLINE
                                     )
                                     stdscr.addstr(
@@ -440,7 +436,7 @@ def start(stdscr):
                                     stdscr.addstr(
                                         currentLine,
                                         displayNamestartingPos + 1,
-                                        str(event["user_id"]),
+                                        str(event["sender"]),
                                         curses.A_DIM
                                     )
                                     stdscr.addstr(
@@ -456,7 +452,7 @@ def start(stdscr):
                                         currentLine,
                                         displayNamestartingPos + 1 +
                                         maxDisplayName - length,
-                                        str(event["user_id"]),
+                                        str(event["sender"]),
                                         curses.A_DIM + curses.A_UNDERLINE
                                     )
                                     stdscr.addstr(
@@ -470,7 +466,7 @@ def start(stdscr):
                                         currentLine,
                                         displayNamestartingPos + 1 +
                                         maxDisplayName - length,
-                                        str(event["user_id"]),
+                                        str(event["sender"]),
                                         curses.A_DIM
                                     )
                                     stdscr.addstr(
