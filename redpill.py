@@ -247,9 +247,9 @@ def start(stdscr):
                                         buf += bufSinceLastWord
 
                                         if PAD_COMMENTS or first:
-                                            linesNeeded += (displayNamestartingPos + maxDisplayName + 3 + len(buf)) / size[1]
+                                            linesNeeded += int((displayNamestartingPos + maxDisplayName + 3 + len(buf)) / size[1])
                                         else:
-                                            linesNeeded += len(buf) / size[1]
+                                            linesNeeded += int(len(buf) / size[1])
 
                                         first = False
                                         lineByLineText.append(buf)
@@ -292,7 +292,7 @@ def start(stdscr):
                                     #    self.X += 1
                             buf += bufSinceLastWord
                             lineByLineText.append(buf)
-                            linesNeeded += (displayNamestartingPos + maxDisplayName + 3 + len(buf)) / size[1]
+                            linesNeeded += int((displayNamestartingPos + maxDisplayName + 3 + len(buf)) / size[1])
                             buf = ""
 
                             if currentLine - linesNeeded < 2:  # how many lines we want to reserve
