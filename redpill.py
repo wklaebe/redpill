@@ -91,7 +91,7 @@ def start(stdscr):
     rooms[all_rooms] = all_rooms
 
     room_keys = list(rooms.keys())
-    room = all_rooms  #room_keys[1] # "all_rooms"
+    room = all_rooms
     nextRoom = 1
 
     curses.halfdelay(10)
@@ -139,7 +139,6 @@ def start(stdscr):
         else:
             line += str(room)
 
-        #line.encode("utf-8")
         if isinstance(rooms[room], Room) and rooms[room].topic is not None:
             line += " · topic: " + rooms[room].topic
 
@@ -226,16 +225,6 @@ def start(stdscr):
                                 if len(rawText) > 0 and rawText[0] == " ":
                                     rawText = rawText[1:]
 
-                            linesNeeded = (displayNamestartingPos + maxDisplayName + 3 + len(rawText)) / size[1]
-                            lin = (displayNamestartingPos + maxDisplayName + 3 + len(rawText))
-
-                            #if currentLine == size[0] - 2:
-                            #    stdscr.addstr(currentLine, 0, str(lin) + " " + str(size[1]) + " " + str(linesNeeded) + "  ", curses.A_UNDERLINE)
-                            #else:
-                            #    stdscr.addstr(currentLine, 0, str(lin) + " " + str(size[1]) + " " + str(linesNeeded) + "  ")
-
-
-
                             linesNeeded = 0
 
                             buf = ""
@@ -303,19 +292,9 @@ def start(stdscr):
                             if currentLine - linesNeeded < 2:  # how many lines we want to reserve
                                 break
 
-                            if currentLine == size[0] - 2:
-                                stdscr.addstr(currentLine, 0, str(lin) + " " + str(size[1]) + " " + str(linesNeeded) + "  ", curses.A_UNDERLINE)
-                            else:
-                                stdscr.addstr(currentLine, 0, str(lin) + " " + str(size[1]) + " " + str(linesNeeded) + "  ")
-
-                            #for i in range(linesNeeded):
-
-
                             if PAD_COMMENTS:
                                 pad = displayNamestartingPos + maxDisplayName + 3
 
-
-                                #if linesNeeded == 0:
                                 linesNeeded += 1
                                 currentLine -= linesNeeded
 
