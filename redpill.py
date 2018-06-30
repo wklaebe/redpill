@@ -92,7 +92,6 @@ def start(stdscr):
 
     room_keys = list(rooms.keys())
     room = all_rooms
-    nextRoom = (room_keys.index(room) + 1) % len(room_keys)
 
     curses.halfdelay(10)
     maxDisplayName = 24
@@ -142,7 +141,7 @@ def start(stdscr):
         if isinstance(rooms[room], Room) and rooms[room].topic is not None:
             line += " · topic: " + rooms[room].topic
 
-        line += " · variables: room: " + room + ", last: " + lastEventRoom + ", nextRoom: " + str(nextRoom)
+        line += " · variables: room: " + room + ", last: " + lastEventRoom
 
         stdscr.addstr(0, 0, line, curses.A_UNDERLINE)
 
@@ -521,8 +520,7 @@ def start(stdscr):
             if c == 9:
                 #stdscr.addstr(1, 0, "%s was pressed\n" % c)
                 log("key pressed: 0x{:X}".format(c))
-                room = room_keys[nextRoom]
-                nextRoom = (nextRoom + 1) % len(rooms)
+                room = room_keys[(room_keys.index(room)+1) % len(rooms)]
                 the_room_to_post_to = None
             elif c == 10: # enter
                 with open('redpill-sends.log', 'a') as the_file:
