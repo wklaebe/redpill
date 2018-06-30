@@ -18,15 +18,15 @@ sys.setdefaultencoding('utf8')
 #requests.packages.urllib3.disable_warnings()
 
 def loadCredentials(filename):
-    global password, username, server
-    json_data = open(filename)
-    data = json.load(json_data)
-    json_data.close()
+    global server, base_url, username, access_token, password
+    with open(filename) as json_data:
+        data = json.load(json_data)
 
+    server = data["home_server"]
+    base_url = data.get("base_url", "https://{}".format(server))
     username = data["username"]
-    password = data["password"]
-    server = data["server"]
-
+    access_token = data.get("access_token", None)
+    password = None if access_token else data["password"]
 
 def processMessage(obj):
     global room, rooms, lastEventRoom, room_keys
@@ -65,7 +65,8 @@ def getFirstRoomAlias(r):
 
 
 def start(stdscr):
-    global size, room, data, rooms, access_token, endTime, rooms, all_rooms, lastEventRoom, room_keys
+    global server, base_url, username, access_token, password
+    global size, room, data, rooms, endTime, rooms, all_rooms, lastEventRoom, room_keys
 
     curses.curs_set(0)
     curses.use_default_colors()
@@ -75,11 +76,12 @@ def start(stdscr):
     stdscr.refresh()
     loadCredentials("./credentials.json")
 
-    client = MatrixClient(server)
-    access_token = client.login_with_password(
-        username,
-        password,
-        size[0])
+    client = MatrixClient(base_url, token=access_token, user_id='@{}:{}'.format(username, server))
+    if access_token is None:
+        access_token = client.login_with_password(
+            username,
+            password,
+            size[0])
 
     rooms = client.get_rooms()
 
