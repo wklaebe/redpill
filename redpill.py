@@ -305,15 +305,17 @@ def start(stdscr):
 
                                     if currentLine + i == size[0] - 2:
                                         stdscr.addstr(
-                                            currentLine + i, displayNamestartingPos +
-                                            maxDisplayName + 3, lineByLineText[i],
+                                            currentLine + i,
+                                            displayNamestartingPos + maxDisplayName + 3,
+                                            lineByLineText[i],
                                             curses.A_BOLD + curses.A_UNDERLINE
                                         )
                                     else:
                                         try:
                                             stdscr.addstr(
-                                                currentLine + i, displayNamestartingPos +
-                                                maxDisplayName + 3, lineByLineText[i],
+                                                currentLine + i,
+                                                displayNamestartingPos + maxDisplayName + 3,
+                                                lineByLineText[i],
                                                 curses.A_BOLD
                                             )
                                         except:
@@ -329,14 +331,16 @@ def start(stdscr):
                                 currentLine -= linesNeeded
                                 if currentLine == size[0] - 2:
                                     stdscr.addstr(
-                                        currentLine, displayNamestartingPos +
-                                        maxDisplayName + 3, rawText,
+                                        currentLine,
+                                        displayNamestartingPos + maxDisplayName + 3,
+                                        rawText,
                                         curses.A_BOLD + curses.A_UNDERLINE
                                     )
                                 else:
                                     stdscr.addstr(
-                                        currentLine, displayNamestartingPos +
-                                        maxDisplayName + 3, rawText,
+                                        currentLine,
+                                        displayNamestartingPos + maxDisplayName + 3,
+                                        rawText,
                                         curses.A_BOLD
                                     )
 
@@ -346,17 +350,18 @@ def start(stdscr):
                                 usern = usern[:maxDisplayName - 3] + "..."
 
                             if event["content"]["msgtype"] == "m.emote":
-
                                 usern = "* " + usern
                                 if currentLine == size[0] - 2:
                                     stdscr.addstr(
-                                        currentLine, displayNamestartingPos + max(0,  maxDisplayName - length),
+                                        currentLine,
+                                        displayNamestartingPos + max(0,  maxDisplayName - length),
                                         str(usern),
                                         curses.A_UNDERLINE + curses.A_BOLD
                                     )
                                 else:
                                     stdscr.addstr(
-                                        currentLine, displayNamestartingPos + max(0,  maxDisplayName - length),
+                                        currentLine,
+                                        displayNamestartingPos + max(0,  maxDisplayName - length),
                                         str(usern),
                                         curses.A_BOLD
                                     )
@@ -364,13 +369,15 @@ def start(stdscr):
                                 usern = "<" + usern + ">"
                                 if currentLine == size[0] - 2:
                                     stdscr.addstr(
-                                        currentLine, displayNamestartingPos + max(0,  maxDisplayName - length),
+                                        currentLine,
+                                        displayNamestartingPos + max(0,  maxDisplayName - length),
                                         str(usern),
                                         curses.A_UNDERLINE
                                     )
                                 else:
                                     stdscr.addstr(
-                                        currentLine, displayNamestartingPos + max(0,  maxDisplayName - length),
+                                        currentLine,
+                                        displayNamestartingPos + max(0,  maxDisplayName - length),
                                         str(usern)
                                     )
 
