@@ -680,7 +680,13 @@ if __name__ == "__main__":
         main_screen.keypad(1)
         curses.start_color()
 
-        start(main_screen)
+        try:
+            start(main_screen)
+        except:
+            import traceback
+            with open('redpill-exception.log', 'a') as f:
+                traceback.print_exc(file=f)
+            raise
 
     except curses.error:
         curses.nocbreak()
