@@ -17,6 +17,10 @@ sys.setdefaultencoding('utf8')
 #from requests import requests
 #requests.packages.urllib3.disable_warnings()
 
+def log(obj, filename='redpill.log'):
+    with open(filename, 'a') as the_file:
+        the_file.write(str(obj) + "\n")
+
 def loadCredentials(filename):
     global server, base_url, username, access_token, password
     with open(filename) as json_data:
@@ -31,9 +35,7 @@ def loadCredentials(filename):
 def processMessage(obj):
     global room, rooms, lastEventRoom, room_keys
 
-    with open('event.log', 'a') as the_file:
-        the_file.write(str(obj) + "\n")
-
+    log(obj, 'redpill-event.log')
 
     if "room_id" in obj:
         if room != all_rooms:
