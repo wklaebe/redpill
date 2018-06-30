@@ -165,6 +165,9 @@ def start(stdscr):
                 stdscr.addstr(currentLine - 1, 0, space, curses.A_UNDERLINE)
 
                 for event in reversed(rooms[room].events):
+                    log(event)
+                    log("maxDisplayName: {}, size: {}, currentLine: {}".format(maxDisplayName, size, currentLine))
+
                     if event["type"] == "m.typing":
                     #if True:
                         continue  # do something clever
@@ -213,6 +216,8 @@ def start(stdscr):
 
                         # assumption: body == normal message
                         length = len(event["sender"]) if "sender" in event else 0
+                        log("length: {}, currentLine: {}".format(length, currentLine))
+
                         if "body" in event["content"]:
 
                             rawText = event["content"]["body"]  # .encode('utf-8')
@@ -529,6 +534,7 @@ def start(stdscr):
 
             if c == 9:
                 #stdscr.addstr(1, 0, "%s was pressed\n" % c)
+                log("key pressed: 0x{:X}".format(c))
                 room = room_keys[nextRoom]
                 nextRoom = (nextRoom + 1) % len(rooms)
                 the_room_to_post_to = None
