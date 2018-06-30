@@ -88,9 +88,8 @@ def start(stdscr):
     rooms = client.get_rooms()
 
     all_rooms = "all rooms"
-    rooms[all_rooms] = Room(client, all_rooms)
+    rooms[all_rooms] = all_rooms
 
-    rooms[all_rooms].events = []
     room_keys = list(rooms.keys())
     room = all_rooms  #room_keys[1] # "all_rooms"
     nextRoom = 1
