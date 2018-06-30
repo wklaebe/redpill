@@ -91,8 +91,8 @@ def start(stdscr):
     rooms[all_rooms] = all_rooms
 
     room_keys = list(rooms.keys())
-    nextRoom = room_keys.index(all_rooms)
-    room = room_keys[nextRoom]
+    room = all_rooms
+    nextRoom = (room_keys.index(room) + 1) % len(room_keys)
 
     curses.halfdelay(10)
     maxDisplayName = 24
